@@ -1,5 +1,6 @@
 package ru.praktikum_services.qa_scooter.page_objects;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,17 +18,21 @@ public class OrderModal {
             "/button[text()='Посмотреть статус']");
     //Заголовок "Номер заказа"
     private final By orderNumberLbl = By.xpath(".//div[contains(@class , 'Order_Text__')]"); //109722
+
     public OrderModal(WebDriver driver) {
         this.driver = driver;
     }
 
-    public boolean isDisplayedConfirmLbl(){
-        return driver.findElement(confirmLbl).isDisplayed();
+    public OrderModal checkIsDisplayedConfirmLbl() {
+        Assert.assertTrue(driver.findElement(confirmLbl).isDisplayed());
+        return this;
     }
-    public void clickConfirmBtn(){
+
+    public OrderModal clickConfirmBtn() {
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.visibilityOfElementLocated(confirmBtn));
         driver.findElement(confirmBtn).click();
+        return this;
     }
 
 

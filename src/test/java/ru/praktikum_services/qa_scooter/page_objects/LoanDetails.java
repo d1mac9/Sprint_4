@@ -23,39 +23,48 @@ public class LoanDetails {
     private final By orderBtn = By.xpath(".//div[contains(@class , 'Order_Buttons__')]/button[text()='Заказать']");
 
 
-    public LoanDetails(WebDriver driver){
+    public LoanDetails(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void waitForLoadDateFld(){
+    public LoanDetails waitForLoadDateFld() {
         new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.visibilityOfElementLocated(dateFld));
+        return this;
     }
 
-    public void setDateFld(String date){
+    public LoanDetails setDateFld(String date) {
         waitForLoadDateFld();
         driver.findElement(dateFld).clear();
         driver.findElement(dateFld).sendKeys(date);
+        return this;
     }
-    public void setRentalPeriodDrpDwn(String rentalPeriod){
+
+    public LoanDetails setRentalPeriodDrpDwn(String rentalPeriod) {
         driver.findElement(rentalPeriodDrpDwn).click();
         driver.findElement(
                 By.xpath(String.format(".//div[@class = 'Dropdown-menu']/div[text() = '%s']", rentalPeriod))).click();
-    }
-    public void setScooterColourChkBx(boolean isBlack, boolean isGrey){
-        if(isBlack){
-            driver.findElement(scooterBlackChkBx).click();
-        }
-        if(isGrey){
-            driver.findElement(scooterGreyChkBx).click();
-        }
-    }
-    public void setCommentFld(String comment){
-        driver.findElement(commentFld).clear();
-        driver.findElement(commentFld).sendKeys(comment);
+        return this;
     }
 
-    public void clickOrderBtn(){
+    public LoanDetails setScooterColourChkBx(boolean isBlack, boolean isGrey) {
+        if (isBlack) {
+            driver.findElement(scooterBlackChkBx).click();
+        }
+        if (isGrey) {
+            driver.findElement(scooterGreyChkBx).click();
+        }
+        return this;
+    }
+
+    public LoanDetails setCommentFld(String comment) {
+        driver.findElement(commentFld).clear();
+        driver.findElement(commentFld).sendKeys(comment);
+        return this;
+    }
+
+    public LoanDetails clickOrderBtn() {
         driver.findElement(orderBtn).click();
+        return this;
     }
 }
