@@ -1,11 +1,13 @@
 package ru.praktikum_services.qa_scooter.page_objects;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 public class Main {
 
@@ -22,30 +24,37 @@ public class Main {
     private final By orderBtn = By.xpath(".//div[contains(@class, 'Home_FinishButton')]" +
             "/button[text() = 'Заказать']");
 
-    public Main(WebDriver driver){
+    public Main(WebDriver driver) {
         this.driver = driver;
     }
 
-
-    public void waitForLoadQuestions() {
+    public Main waitForLoadQuestions() {
         new WebDriverWait(driver, 10).until(driver -> (driver.findElement(questions).getText() != null
                 && !driver.findElement(questions).getText().isEmpty()
         ));
+        return this;
     }
 
-    public void clickAccordionTitleByText(String text){
+    public Main clickAccordionTitleByText(String text) {
         WebElement element = driver.findElement(accordionTitle);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
         driver.findElement(By.xpath(String.format(".//div[text()='%s']", text))).click();
+        return this;
     }
 
-    public boolean checkAccordionDataIsDispalyed(String text){
-        return driver.findElement(By.xpath(String.format(".//div/p[text()='%s']", text))).isDisplayed();
+    public Main checkAccordionDataIsDisplayed(String text, boolean actualDisplayed) {
+        boolean isDisplayed = driver.findElement(By.xpath(String.format(".//div/p[text()='%s']", text))).isDisplayed();
+        Assert.assertEquals(
+                "Отображается текст при раскрытии аккордеона?", isDisplayed, actualDisplayed);
+        return this;
     }
 
-    public void clickOrderBtn(){
+    public Main clickOrderBtn() {
         new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(orderBtn));
-        driver.findElement(orderBtn).click();
+        WebElement element = driver.findElement(orderBtn);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+        element.click();
+        return this;
     }
 
 }

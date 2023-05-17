@@ -1,24 +1,19 @@
 package ru.praktikum_services.qa_scooter.tests;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import ru.praktikum_services.qa_scooter.page_objects.Header;
 import ru.praktikum_services.qa_scooter.page_objects.LoanDetails;
 import ru.praktikum_services.qa_scooter.page_objects.OrderModal;
 import ru.praktikum_services.qa_scooter.page_objects.PersonalData;
 
+import static ru.praktikum_services.qa_scooter.model.config.AppConfig.MAIN_URL;
 import static ru.praktikum_services.qa_scooter.model.constans.RentalPeriods.DAY;
 import static ru.praktikum_services.qa_scooter.model.constans.RentalPeriods.DAY_2;
 
 @RunWith(Parameterized.class)
-public class OrderScooterTest {
-    private WebDriver driver;
+public class OrderScooterHappyPathTest extends BaseTest {
     private final String name;
     private final String surname;
     private final String address;
@@ -30,7 +25,7 @@ public class OrderScooterTest {
     private final boolean isGrey;
     private final String comment;
 
-    public OrderScooterTest(
+    public OrderScooterHappyPathTest(
             String name, String surname, String address, String underground, String phone, String date,
             String rentalPeriod, boolean isBlack, boolean isGrey, String comment) {
         this.name = name;
@@ -55,40 +50,32 @@ public class OrderScooterTest {
         };
     }
 
-    @After
-    public void tearDown() {
-        driver.quit();
-    }
-
     @Test
     public void orderScooterHappyPathTest() {
-        WebDriverManager.edgedriver().setup();
-        driver = new EdgeDriver();
-        driver.get("https://qa-scooter.praktikum-services.ru/");
+        driver.get(MAIN_URL);
 
-        Header objHeader = new Header(driver);
-        objHeader.waitForLoadHeaderBtn();
-        objHeader.clickOrderBtn();
+        new Header(driver)
+                .waitForLoadHeaderBtn()
+                .clickOrderBtn();
 
-        PersonalData objPd = new PersonalData(driver);
-        objPd.waitUntilNameFldLoaded();
-        objPd.setNameFld(name);
-        objPd.setSurnameFld(surname);
-        objPd.setAddressFld(address);
-        objPd.setUndergroundFld(underground);
-        objPd.setPhoneFld(phone);
-        objPd.clickNextBtn();
+        new PersonalData(driver)
+                .waitUntilNameFldLoaded()
+                .setNameFld(name)
+                .setSurnameFld(surname)
+                .setAddressFld(address)
+                .setUndergroundFld(underground)
+                .setPhoneFld(phone)
+                .clickNextBtn();
 
-        LoanDetails objLoan = new LoanDetails(driver);
-        objLoan.setDateFld(date);
-        objLoan.setRentalPeriodDrpDwn(rentalPeriod);
-        objLoan.setScooterColourChkBx(isBlack, isGrey);
-        objLoan.setCommentFld(comment);
-        objLoan.clickOrderBtn();
+        new LoanDetails(driver)
+                .setDateFld(date)
+                .setRentalPeriodDrpDwn(rentalPeriod)
+                .setScooterColourChkBx(isBlack, isGrey)
+                .setCommentFld(comment)
+                .clickOrderBtn();
 
-        OrderModal objOm = new OrderModal(driver);
-        objOm.clickConfirmBtn();
-
-        Assert.assertTrue(objOm.isDisplayedConfirmLbl());
+        new OrderModal(driver)
+                .clickConfirmBtn()
+                .checkIsDisplayedConfirmLbl();
     }
 }
