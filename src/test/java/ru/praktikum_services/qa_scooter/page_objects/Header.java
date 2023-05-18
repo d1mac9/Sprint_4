@@ -57,5 +57,4 @@ public class Header {
         Assert.assertEquals("Проверка соответствия URL в новой вкладке", YANDEX_URL, driver.getCurrentUrl());
         return this;
     }
-
 }

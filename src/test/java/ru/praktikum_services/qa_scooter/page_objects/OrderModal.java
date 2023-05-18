@@ -13,11 +13,6 @@ public class OrderModal {
             ".//div[contains(@class , 'Order_ModalHeader__') and text() = 'Заказ оформлен']");
     // Кнопка "Да"
     private final By confirmBtn = By.xpath(".//div[contains(@class , 'Order_Buttons__')]/button[text()='Да']");
-    // Кнопка "Посмотреть статус"
-    private final By checkStatusBtn = By.xpath(".//div[contains(@class , 'Order_NextButton__')]" +
-            "/button[text()='Посмотреть статус']");
-    //Заголовок "Номер заказа"
-    private final By orderNumberLbl = By.xpath(".//div[contains(@class , 'Order_Text__')]"); //109722
 
     public OrderModal(WebDriver driver) {
         this.driver = driver;
