@@ -3,8 +3,8 @@ package ru.praktikum_services.qa_scooter.page_objects;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static ru.praktikum_services.qa_scooter.helper.Helpers.waitForLoadElement;
 
 public class OrderModal {
     private final WebDriver driver;
@@ -24,11 +24,8 @@ public class OrderModal {
     }
 
     public OrderModal clickConfirmBtn() {
-        new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.visibilityOfElementLocated(confirmBtn));
+        waitForLoadElement(confirmBtn, driver);
         driver.findElement(confirmBtn).click();
         return this;
     }
-
-
 }

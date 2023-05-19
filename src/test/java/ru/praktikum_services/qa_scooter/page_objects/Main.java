@@ -5,8 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static ru.praktikum_services.qa_scooter.helper.Helpers.waitForLoadElement;
 
 
 public class Main {
@@ -18,8 +19,6 @@ public class Main {
 
     //Кнопка раскрытия аккордеона
     private final By accordionTitle = By.className("accordion__button");
-    // Текст внутри аккордеона
-    private final By accordionData = By.className("accordion__panel");
 
     private final By orderBtn = By.xpath(".//div[contains(@class, 'Home_FinishButton')]" +
             "/button[text() = 'Заказать']");
@@ -50,11 +49,10 @@ public class Main {
     }
 
     public Main clickOrderBtn() {
-        new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(orderBtn));
+        waitForLoadElement(orderBtn, driver);
         WebElement element = driver.findElement(orderBtn);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
         element.click();
         return this;
     }
-
 }
