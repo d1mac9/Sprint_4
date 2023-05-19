@@ -3,12 +3,11 @@ package ru.praktikum_services.qa_scooter.page_objects;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static ru.praktikum_services.qa_scooter.helper.Helpers.waitForLoadElement;
 import static ru.praktikum_services.qa_scooter.model.config.AppConfig.YANDEX_URL;
 
 
@@ -26,8 +25,7 @@ public class Header {
     }
 
     public Header waitForLoadHeaderBtn() {
-        new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.visibilityOfElementLocated(orderBtn));
+        waitForLoadElement(orderBtn, driver);
         return this;
     }
 

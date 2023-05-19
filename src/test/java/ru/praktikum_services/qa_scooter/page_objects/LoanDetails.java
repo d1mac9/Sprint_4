@@ -2,8 +2,8 @@ package ru.praktikum_services.qa_scooter.page_objects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static ru.praktikum_services.qa_scooter.helper.Helpers.waitForLoadElement;
 
 public class LoanDetails {
     private final WebDriver driver;
@@ -28,8 +28,7 @@ public class LoanDetails {
     }
 
     public LoanDetails waitForLoadDateFld() {
-        new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.visibilityOfElementLocated(dateFld));
+        waitForLoadElement(dateFld, driver);
         return this;
     }
 

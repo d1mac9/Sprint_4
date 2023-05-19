@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static ru.praktikum_services.qa_scooter.helper.Helpers.waitForLoadElement;
+
 
 public class PersonalData {
     private final WebDriver driver;
@@ -56,17 +58,15 @@ public class PersonalData {
         return this;
     }
 
-    public PersonalData checkValidationHints(By locator){
-        driver.findElement(locator).isDisplayed();
-        String text = driver.findElement(locator).getText();
+    public PersonalData checkValidationHintsIsDisplayed(By locator, String hint){
              Assert.assertTrue(
-                     String.format("Элемент '%s' не отображается", text),
+                     String.format("Валидационная подсказка '%s' не отображается", hint),
                      driver.findElement(locator).isDisplayed());
          return this;
     }
 
     public PersonalData isDisplayedMainLbl() {
-        new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(mainLbl));
+        waitForLoadElement(mainLbl, driver);
         Assert.assertTrue("Проверка загрузки заголовка Для кого самокат", driver.findElement(mainLbl).isDisplayed());
         return this;
     }
@@ -77,7 +77,7 @@ public class PersonalData {
         return this;
     }
     public PersonalData checkValidationHintNameFld(String hint){
-        checkValidationHints(validationHintNameFld);
+        checkValidationHintsIsDisplayed(validationHintNameFld, hint);
         Assert.assertEquals(
                 "Соответствие текста подсказки", hint, driver.findElement(validationHintNameFld).getText());
         return this;
@@ -89,7 +89,7 @@ public class PersonalData {
         return this;
     }
     public PersonalData checkValidationHintSurnameFld(String hint){
-        checkValidationHints(validationHintSurnameFld);
+        checkValidationHintsIsDisplayed(validationHintSurnameFld, hint);
         Assert.assertEquals(
                 "Соответствие текста подсказки", hint, driver.findElement(validationHintSurnameFld).getText());
         return this;
@@ -101,7 +101,7 @@ public class PersonalData {
         return this;
     }
     public PersonalData checkValidationHintAddressFld(String hint){
-        checkValidationHints(validationHintAddressFld);
+        checkValidationHintsIsDisplayed(validationHintAddressFld, hint);
         Assert.assertEquals(
                 "Соответствие текста подсказки", hint, driver.findElement(validationHintAddressFld).getText());
         return this;
@@ -116,7 +116,7 @@ public class PersonalData {
     }
 
     public PersonalData checkValidationHintUndergroundFld(String hint){
-        checkValidationHints(validationHintUndergroundFld);
+        checkValidationHintsIsDisplayed(validationHintUndergroundFld, hint);
         Assert.assertEquals(
                 "Соответствие текста подсказки", hint, driver.findElement(validationHintUndergroundFld).getText());
         return this;
@@ -129,7 +129,7 @@ public class PersonalData {
     }
 
     public PersonalData checkValidationHintPhoneFld(String hint){
-        checkValidationHints(validationHintPhoneFld);
+        checkValidationHintsIsDisplayed(validationHintPhoneFld, hint);
         Assert.assertEquals(
                 "Соответствие текста подсказки", hint, driver.findElement(validationHintPhoneFld).getText());
         return this;
