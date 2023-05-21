@@ -1,10 +1,10 @@
-package ru.praktikum_services.qa_scooter.page_objects;
+package ru.praktikumservices.qascooter.pageobject;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static ru.praktikum_services.qa_scooter.helper.Helpers.waitForLoadElement;
+import static ru.praktikumservices.qascooter.helper.Helpers.waitForLoadElement;
 
 public class OrderModal {
     private final WebDriver driver;

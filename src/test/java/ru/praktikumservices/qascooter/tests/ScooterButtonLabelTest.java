@@ -1,11 +1,11 @@
-package ru.praktikum_services.qa_scooter.tests;
+package ru.praktikumservices.qascooter.tests;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import ru.praktikum_services.qa_scooter.page_objects.Header;
+import ru.praktikumservices.qascooter.pageobject.Header;
 
-import static ru.praktikum_services.qa_scooter.model.config.AppConfig.*;
+import static ru.praktikumservices.qascooter.model.config.AppConfig.*;
 
 @RunWith(Parameterized.class)
 public class ScooterButtonLabelTest extends BaseTest {

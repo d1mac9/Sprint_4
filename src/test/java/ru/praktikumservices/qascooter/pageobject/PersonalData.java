@@ -1,4 +1,4 @@
-package ru.praktikum_services.qa_scooter.page_objects;
+package ru.praktikumservices.qascooter.pageobject;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -6,13 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static ru.praktikum_services.qa_scooter.helper.Helpers.waitForLoadElement;
-
-
 public class PersonalData {
     private final WebDriver driver;
-    //Заголовок "Для кого самокат"
-    private final By mainLbl = By.xpath(".//div[text()='Для кого самокат']");
 
     //Поле "Имя"
     private final By nameFld = By.xpath(".//input[@placeholder = '* Имя']");
@@ -63,12 +58,6 @@ public class PersonalData {
                      String.format("Валидационная подсказка '%s' не отображается", hint),
                      driver.findElement(locator).isDisplayed());
          return this;
-    }
-
-    public PersonalData isDisplayedMainLbl() {
-        waitForLoadElement(mainLbl, driver);
-        Assert.assertTrue("Проверка загрузки заголовка Для кого самокат", driver.findElement(mainLbl).isDisplayed());
-        return this;
     }
 
     public PersonalData setNameFld(String name) {
