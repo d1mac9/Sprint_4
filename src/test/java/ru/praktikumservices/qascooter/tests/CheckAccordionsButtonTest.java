@@ -1,11 +1,11 @@
-package ru.praktikum_services.qa_scooter.tests;
+package ru.praktikumservices.qascooter.tests;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import ru.praktikum_services.qa_scooter.page_objects.Main;
+import ru.praktikumservices.qascooter.pageobject.Main;
 
-import static ru.praktikum_services.qa_scooter.model.config.AppConfig.MAIN_URL;
+import static ru.praktikumservices.qascooter.model.config.AppConfig.MAIN_URL;
 
 @RunWith(Parameterized.class)
 public class CheckAccordionsButtonTest extends BaseTest {

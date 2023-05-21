@@ -1,4 +1,4 @@
-package ru.praktikum_services.qa_scooter.model.constans;
+package ru.praktikumservices.qascooter.model.constant;
 
 public class RentalPeriods {
     public static final String DAY = "сутки";

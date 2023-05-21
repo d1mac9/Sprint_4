@@ -1,4 +1,4 @@
-package ru.praktikum_services.qa_scooter.model.config;
+package ru.praktikumservices.qascooter.model.config;
 
 public class AppConfig {
     public static final String MAIN_URL = "https://qa-scooter.praktikum-services.ru/";

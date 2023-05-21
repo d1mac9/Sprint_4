@@ -1,15 +1,12 @@
-package ru.praktikum_services.qa_scooter.page_objects;
+package ru.praktikumservices.qascooter.pageobject;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import ru.praktikumservices.qascooter.helper.Helpers;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static ru.praktikum_services.qa_scooter.helper.Helpers.waitForLoadElement;
-import static ru.praktikum_services.qa_scooter.model.config.AppConfig.YANDEX_URL;
-
 
 public class Header {
     private final WebDriver driver;
@@ -25,7 +22,7 @@ public class Header {
     }
 
     public Header waitForLoadHeaderBtn() {
-        waitForLoadElement(orderBtn, driver);
+        Helpers.waitForLoadElement(orderBtn, driver);
         return this;
     }
 
@@ -49,10 +46,10 @@ public class Header {
         return this;
     }
 
-    public Header checkNewTabURL() {
+    public Header checkNewTabURL(String url) {
         List<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
-        Assert.assertEquals("Проверка соответствия URL в новой вкладке", YANDEX_URL, driver.getCurrentUrl());
+        Assert.assertEquals("Проверка соответствия URL в новой вкладке", url, driver.getCurrentUrl());
         return this;
     }
 }

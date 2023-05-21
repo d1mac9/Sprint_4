@@ -1,9 +1,8 @@
-package ru.praktikum_services.qa_scooter.page_objects;
+package ru.praktikumservices.qascooter.pageobject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
-import static ru.praktikum_services.qa_scooter.helper.Helpers.waitForLoadElement;
+import ru.praktikumservices.qascooter.helper.Helpers;
 
 public class LoanDetails {
     private final WebDriver driver;
@@ -28,7 +27,7 @@ public class LoanDetails {
     }
 
     public LoanDetails waitForLoadDateFld() {
-        waitForLoadElement(dateFld, driver);
+        Helpers.waitForLoadElement(dateFld, driver);
         return this;
     }
 
